@@ -1,54 +1,80 @@
 # job-app-tracker-vue
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue 3 frontend for the Job Application Tracker app. This project is located at `ui/job-app-tracker-vue` and connects to the backend API in `api/JobAppTrackerApi`.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Create, edit, and delete job applications
+- Search and filter by company, title, and status
+- Track status values: Interested, Applied, Interviewing, Offer, Rejected, Archived
 
-## Recommended Browser Setup
+## Setup
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+Install dependencies:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+Start the development server:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Build for production:
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Preview the production build:
+
+```sh
+npm run preview
+```
+
+Run unit tests:
 
 ```sh
 npm run test:unit
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Type-check the project:
+
+```sh
+npm run type-check
+```
+
+Lint and format:
 
 ```sh
 npm run lint
+npm run format
 ```
+
+## Recommended editor
+
+- VS Code with [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- Disable Vetur if installed
+
+## Notes
+
+- Refer to the root `README.md` for backend setup instructions.
+- The legacy Angular UI is archived in `ui/angular-legacy`.
+
+## Author
+
+George Louie Conde  
+Software Developer  
+Calgary, AB  
+[LinkedIn](https://linkedin.com/in/glconde)  
+[GitHub](https://github.com/glconde)
+
+## License
+
+This project is licensed under the MIT License. See the root `LICENSE` file for details.
+
+## Version
+
+0.1.0
