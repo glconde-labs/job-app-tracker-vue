@@ -2,6 +2,15 @@
 
 A full-stack job application tracker with a Vue 3 frontend and an ASP.NET Core Web API backend. Track job applications, update statuses, and persist data to SQLite.
 
+## Migration Context
+
+This repository is a Vue 3 migration/reimplementation of the original Angular frontend version of the Job Application Tracker project.
+
+Original Angular project:
+https://github.com/glconde/job-app-tracker
+
+The ASP.NET Core backend architecture and REST API design are preserved while rebuilding the frontend using Vue 3 and TypeScript.
+
 ## Features
 
 - Add, view, edit, and delete job applications
@@ -28,12 +37,12 @@ A full-stack job application tracker with a Vue 3 frontend and an ASP.NET Core W
 ## Architecture
 
 ```text
-Vue 3 + Vite
-   ↓
-ASP.NET Core Web API
-   ↓
+Vue 3 + Vite SPA
+↓
+ASP.NET Core REST API
+↓
 Entity Framework Core
-   ↓
+↓
 SQLite
 ```
 
@@ -121,6 +130,16 @@ npm run format       # format source files
 
 - If the backend is running on a different port than the frontend, update the Vue app API base URL as needed.
 - Keep `ui/angular-legacy` for reference or migration history; the active frontend is in `ui/job-app-tracker-vue`.
+
+## Future Improvements
+
+- Authentication and authorization
+- Dashboard analytics
+- Responsive mobile layout
+- Dockerized deployment
+- CI/CD pipeline integration
+- Playwright end-to-end testing
+- Pagination and sorting
 
 ## License
 
