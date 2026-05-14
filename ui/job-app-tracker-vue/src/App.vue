@@ -12,7 +12,7 @@ const error = ref('')
 const editingId = ref<number | null>(null)
 const editingCreatedAt = ref<string | null>(null)
 const searchTerm = ref('')
-const selectedStatus = ref('')
+const selectedStatus = ref<ApplicationStatus | ''>('')
 
 const formInitialState: JobApplicationFormModel = {
   companyName: '',
@@ -26,6 +26,15 @@ const formInitialState: JobApplicationFormModel = {
 
 const formModel = ref<JobApplicationFormModel>({ ...formInitialState })
 const statusOptions = Object.values(ApplicationStatus)
+const statusEmojiMap: Record<ApplicationStatus, string> = {
+  [ApplicationStatus.Interested]: '⭐',
+  [ApplicationStatus.Applied]: '📤',
+  [ApplicationStatus.Interviewing]: '🗣️',
+  [ApplicationStatus.Offer]: '💼',
+  [ApplicationStatus.Rejected]: '❌',
+  [ApplicationStatus.Archived]: '🗄️',
+}
+const getStatusEmoji = (status: ApplicationStatus) => statusEmojiMap[status] || ''
 
 const filteredApplications = computed(() => {
   const term = searchTerm.value.trim().toLowerCase()
@@ -122,18 +131,50 @@ const deleteJobApplicationHandler = async (id: number) => {
   }
 }
 
+const countByStatus = (status: ApplicationStatus) =>
+  applications.value.filter((app) => app.status === status).length
+
 const resetForm = () => {
   formModel.value = { ...formInitialState }
+  editingId.value = null
+  editingCreatedAt.value = null
 }
 
-onMounted(() => {
-  loadApplications()
+onMounted(async () => {
+  await loadApplications()
 })
 </script>
 
 <template>
   <div class="page-container">
     <h1>Job Application Tracker</h1>
+    <!-- Summary Section -->
+    <section class="summary-section">
+      <div class="summary-card">
+          <span class="legend-icon">{{ getStatusEmoji(ApplicationStatus.Applied) }}</span
+          >Applied: {{ countByStatus(ApplicationStatus.Applied) }}
+      </div>
+      <div class="summary-card">
+        <span class="legend-icon">{{ getStatusEmoji(ApplicationStatus.Interviewing) }}</span>
+        Interview: {{ countByStatus(ApplicationStatus.Interviewing) }}
+      </div>
+      <div class="summary-card">
+        <span class="legend-icon">{{ getStatusEmoji(ApplicationStatus.Interested) }}</span>
+        Interested: {{ countByStatus(ApplicationStatus.Interested) }}
+      </div>
+      <div class="summary-card">
+        <span class="legend-icon">{{ getStatusEmoji(ApplicationStatus.Offer) }}</span
+        >Offer: {{ countByStatus(ApplicationStatus.Offer) }}
+      </div>
+      <div class="summary-card">
+        <span class="legend-icon">{{ getStatusEmoji(ApplicationStatus.Rejected) }}</span
+        >Rejected: {{ countByStatus(ApplicationStatus.Rejected) }}
+      </div>
+      <div class="summary-card">
+        <span class="legend-icon">{{ getStatusEmoji(ApplicationStatus.Archived) }}</span
+        >Archived: {{ countByStatus(ApplicationStatus.Archived) }}
+      </div>
+    </section>
 
     <div class="double-column">
       <!-- Form Section -->
@@ -264,7 +305,13 @@ onMounted(() => {
                 <td>{{ application.companyName }}</td>
                 <td>{{ application.jobTitle }}</td>
                 <td>
-                  <span class="status-badge">{{ application.status }}</span>
+                  <span
+                    class="status-badge"
+                    :title="application.status"
+                    :aria-label="application.status"
+                  >
+                    {{ getStatusEmoji(application.status) }}
+                  </span>
                 </td>
                 <td>{{ new Date(application.dateApplied).toLocaleDateString() }}</td>
                 <td>{{ application.location || '-' }}</td>
